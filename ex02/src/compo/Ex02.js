@@ -24,8 +24,11 @@ function Ex02 () {
 
     function deleteText (e) {
         //e.target.value
-        setTodoArray(todoArray.filter(function(data, index){
-            return index != e.target.value;
+        setTodoArray(todoArray.filter(function(data, index){   // filter함수의 첫 번째 매개변수는 data여야해서 index만 작성 x
+            return index != e.target.value;  
+            // != : 타입과 상관없이 안에 있는 값만 비교 / !== : 타입까지 비교 
+            // ex) 10 == '10' --> true / 10 === '10' --> false
+            // 배열의 index -> 숫자 타입   / e.target.value -> 문자열타입  
         }))
     }
  
