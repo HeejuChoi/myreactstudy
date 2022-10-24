@@ -4,6 +4,7 @@ import {Link, useNavigate} from 'react-router-dom'
 function Ex04(){
     const [inputId, setInputId] = useState('');
     const [inputPw, setInputPw] = useState('');
+    const [inputNick, setInputNick] = useState('');
 
     const nav = useNavigate();
     // useNavigate --> 주소 경로를 입력받아 요청해줄 수 있는 Hook
@@ -41,24 +42,30 @@ function Ex04(){
     useEffect (function () {
         if(inputId == 'smhrd' && inputPw =='123'){
             setResult("smhrd님 환영합니다")
-            nav("/")  // useNavigate 활용해서 로그인에 성공하면 바로 Home으로 돌아가기 
+            //nav("/")  // useNavigate 활용해서 로그인에 성공하면 바로 Home으로 돌아가기 
+            nav("/about?id=smhrd&nick="+inputNick); // 로그인 성공하면 about 페이지로 이동하면서 주소에 해당 내용 적힘 
+            // +inputNick 하면 사용자가 입력한 값이 queryString으로 주소에 나옴 
         }
        else{ 
         setResult("다시 입력해주세요")
        }
-    }, [inputPw])
+    }, [inputNick])
     // 1. const로 ID, PW 상태값을 수 있게 선언 
     // 2. getId, getPw 함수로 input에 입력하는 값으로 inputId, inputPw가 바뀔 수 있게 작성
     // 3. useEffect에 if문을 통해 조건 주기 
     // 4. 실제 입력해서 맞게 입력하면 로그인 성공!  
-    // (추가) [inputPw]를 추가하면 패스워드 입력할 때만 실행시켜주세요
+    // (추가) [inputNick]를 추가하면 Nickname을 입력할 때만 실행시켜주세요
      
     return(
         <>
-            <input onChange={getId}></input>
+            ID : <input onChange={getId}></input>
             {/* onChange : input에 입력될 때마다 {getID}를 실행해주세요. */}
             <br></br>
-            <input onChange={getPw}></input>
+            PW : <input onChange={getPw}></input>
+            <br></br>
+            Nick : <input onChange={(e)=> setInputNick(e.target.value)}></input>  {/* 닉네임 입력할 input 태그 */}
+            {/* Nick의 input태그의 내용이 바뀔 때 setInputNick이 실행됨 */}
+
             {/* <button onClick={chResult}>로그인</button> */}
             <h1>{result}</h1>
             <br></br>
