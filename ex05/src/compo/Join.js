@@ -22,12 +22,13 @@ function Join(){
         useId.current.focus();
     }
 
-    const nav = useNavigate();
-    function tryJoin() {
-        nav("/login?id="+inputId+"&pw="+inputPw+"&nick="+inputNick);
+    // const nav = useNavigate();
+    // function tryJoin() {
+    //     nav("/login?id="+inputId+"&pw="+inputPw+"&nick="+inputNick);
         // nav(주소값);
         // 사용자가 입력한 키값이 쿼리스트링으로 넘어가게 된다
-    }
+    //}
+    // form : 주소값으로 이동하면서 form 태그 안에 있는 내용도 같이 전달 
 
 
 
@@ -37,13 +38,19 @@ function Join(){
         // ref 속성을 쓸 수 있음 
         <>
         <h1>회원가입 페이지 입니다</h1>
-        ID:<input onChange={(e) =>setInputId(e.target.value)} value={inputId} ref={useId}></input><br></br>
-        PW:<input onChange={(e) =>setInputPw(e.target.value)} value={inputPw}></input><br></br>
-        Nick:<input onChange={(e) =>setInputNick(e.target.value)} value={inputNick}></input><br></br>
+        {/* form으로 넘길 때 꼭 name 사용해야함 */}
+        <form action='/Login'>
+        ID:<input name='id' onChange={(e) =>setInputId(e.target.value)} value={inputId} ref={useId}></input><br></br>
+        PW:<input name='pw' onChange={(e) =>setInputPw(e.target.value)} value={inputPw}></input><br></br>
+        Nick:<input name='nick' onChange={(e) =>setInputNick(e.target.value)} value={inputNick}></input><br></br>
         {/* <Link to="/Login"><button>JOIN</button></Link> */}
-
-        <button onClick={tryJoin}>JOIN</button>
-        <button onClick={reset}>초기화</button>
+        {/* <button onClick={tryJoin}>JOIN</button> */}
+        <button>JOIN</button>
+        {/* form태그 안에 있으면 submit(데이터값을 전달하겠다)이라 그대로 값이 남아있어서 
+            1) form 태그 밖에 빼거나 
+            2) type 지정해주기  */}
+        <button onClick={reset} type="button">초기화</button>
+        </form>
         </>
     )
 }
